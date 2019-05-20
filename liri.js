@@ -1,6 +1,7 @@
 const keys = require('./index.js');
 const Twitter = require('twitter');
 const Spotify = require('node-spotify-api');
+const request = require('request');
 
 var getMyTweets = function() {
     var client = new Twitter(keys.twitterKeys);
@@ -33,7 +34,7 @@ var getMeSpotify = function (songName) {
     var spotify = new Spotify(keys.spotifyKeys);
   spotify.search({ type: 'track', query: songName}, function(err, data) {
     if (err) {
-      return console.log('Error occurred: ' + err);
+      return console.log('Error: ' + err);
     }
 //   console.log(data.tracks.items[0]);
     var songs = data.tracks.items;
@@ -50,6 +51,28 @@ var getMeSpotify = function (songName) {
 
   });
 }
+var getMyMovies = function (movieName) { 
+  //sadly can't get this to work right now. something with the API key and how I'm transposing it i guess. 
+  // var omdbapi = new request(keys.omdbKeys.id);
+  // request("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&r=json" + omdbapi, 
+  request("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&r=json&apikey=trilogy",
+  function (error, response, body) {
+  if (!error && response.statusCode) {
+  // console.log('body:', body);
+
+  var jsonData = JSON.parse(body);
+  console.log('Title: ', jsonData.Title);
+  console.log('Actors: ', jsonData.Actors);
+  console.log('Year: ', jsonData.Year);
+  console.log('Rated: ', jsonData.Rated);
+  console.log('IMDB Rating: ', jsonData.imdbRating);
+  console.log('Rotten Tomatoes: ', jsonData.tomatoURL);
+  console.log('Language: ', jsonData.Language);
+  console.log('Country: ', jsonData.Country);
+  console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+  }
+});
+}
 
 var pick = function(caseData, functionData) { 
     switch(caseData) {
@@ -58,8 +81,10 @@ var pick = function(caseData, functionData) {
         break;
         case 'spotify-this-song' :
             getMeSpotify(functionData);
-            default:
-                console.log("Liri won't do that.");
+        case 'movie-this' :
+            getMyMovies(functionData);
+        // default:
+        //         console.log("Liri won't do that.");
     }
 }
 var runThis = function(arOne, argTwo) {

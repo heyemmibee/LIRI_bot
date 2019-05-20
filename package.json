@@ -1,0 +1,24 @@
+{
+  "name": "hw-solution",
+  "version": "1.0.0",
+  "description": "liri",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heyemmibee/LIRI_bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heyemmibee/LIRI_bot/issues"
+  },
+  "homepage": "https://github.com/heyemmibee/LIRI_bot#readme",
+  "dependencies": {
+    "request": "^2.88.0",
+    "spotify": "^0.3.0",
+    "twitter": "^1.7.1"
+  }
+}

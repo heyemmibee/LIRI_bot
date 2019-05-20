@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/heyemmibee/LIRI_bot#readme",
   "dependencies": {
+    "install": "^0.12.2",
+    "node-spotify-api": "^1.1.1",
+    "npm": "^6.9.0",
     "request": "^2.88.0",
-    "spotify": "^0.3.0",
     "twitter": "^1.7.1"
   }
 }

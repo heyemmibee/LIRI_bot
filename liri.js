@@ -2,6 +2,8 @@ const keys = require('./index.js');
 const Twitter = require('twitter');
 const Spotify = require('node-spotify-api');
 const request = require('request');
+var fs = require('fs');
+
 
 var getMyTweets = function() {
     var client = new Twitter(keys.twitterKeys);
@@ -74,17 +76,35 @@ var getMyMovies = function (movieName) {
 });
 }
 
+var doWhatItSays = function () {
+fs.readFile("random.txt", 'utf8', function (err, data) {
+  if (err) throw err;
+  
+  var randomdata = data.split(',');
+
+  if (randomdata.length == 2) {
+    pick(randomdata[0], randomdata[1]);
+  } else if (randomdata.length == 1) {
+    pick(randomdata[0]);
+  }
+});
+}
 var pick = function(caseData, functionData) { 
     switch(caseData) {
         case 'my-tweets' :
             getMyTweets();
-        break;
+            break;
         case 'spotify-this-song' :
             getMeSpotify(functionData);
+            break;
         case 'movie-this' :
             getMyMovies(functionData);
-        // default:
-        //         console.log("Liri won't do that.");
+            break;
+        case 'do-what-it-says' :
+            doWhatItSays();
+            break;
+        default:
+        console.log("Liri won't do that.");
     }
 }
 var runThis = function(arOne, argTwo) {

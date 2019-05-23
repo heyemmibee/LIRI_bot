@@ -1,4 +1,4 @@
-const keys = require('./index.js');
+const keys = require('./keys.js/index.js');
 const Twitter = require('twitter');
 const Spotify = require('node-spotify-api');
 const request = require('request');
